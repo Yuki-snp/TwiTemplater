@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TwiTemplater</string>
+    <string name="copybox">ここにテキストを貼り付け</string>
+    <string name="edit_button">編集</string>
+    <string name="edit_button2">編集(filled)</string>
+    <string name="tweet_button">ツイート</string>
+</resources>
