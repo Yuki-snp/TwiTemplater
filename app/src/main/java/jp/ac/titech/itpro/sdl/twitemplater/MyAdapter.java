@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -60,7 +63,6 @@ public class MyAdapter extends BaseAdapter {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
             //EditTexitが編集し終わったときに呼ばれる関数
             @Override
@@ -70,18 +72,51 @@ public class MyAdapter extends BaseAdapter {
             }
         });
 
-        /**
-        ((EditText)convertView.findViewById(R.id.Edit)).setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        //各処理とも最後に文字数計算を忘れない
+
+        ((Switch)convertView.findViewById(R.id.switch_c)).setChecked(nounList.get(position).getisConnect());
+        ((Switch)convertView.findViewById(R.id.switch_c)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
-                    // フォーカスが外れた場合キーボードを非表示にする
-                    InputMethodManager inputMethodMgr = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                    inputMethodMgr.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()) {
+                    //mSwitch : Off -> On の時の処理
+                    nounList.get(position).setisConnect(true);
+                } else {
+                    //mSwitch : On -> Off の時の処理
+                    nounList.get(position).setisConnect(false);
                 }
             }
         });
-         */
+
+        ((Switch)convertView.findViewById(R.id.switch_s)).setChecked(nounList.get(position).getSelected());
+        ((Switch)convertView.findViewById(R.id.switch_s)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()) {
+                    //mSwitch : Off -> On の時の処理
+                    nounList.get(position).setSelected(true);
+                } else {
+                    //mSwitch : On -> Off の時の処理
+                    nounList.get(position).setSelected(false);
+                }
+            }
+        });
+
+        ((Button)convertView.findViewById(R.id.button_c)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nounList.get(position).setEdit("");
+                notifyDataSetChanged();
+            }
+        });
+
+        ((Button)convertView.findViewById(R.id.button_f)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nounList.get(position).setEdit(nounList.get(position).getAnswer());
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }

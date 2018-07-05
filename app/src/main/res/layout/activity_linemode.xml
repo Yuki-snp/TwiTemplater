@@ -17,16 +17,33 @@
             android:layout_height="0dp"
             android:gravity="center_vertical|center"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="2">
         </ListView>
 
-        <Button
-            android:id="@+id/Tweet_button"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tweet_button"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/Tweet_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tweet_button"
+                android:textSize="30sp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/textSum"
+                android:layout_width="160sp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text=""
+                android:textSize="30sp"
+                android:layout_weight="0"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

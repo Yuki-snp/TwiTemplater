@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -21,6 +23,7 @@ public class LineModeActivity extends AppCompatActivity {
 
     private String Template;
     private boolean filled;
+    private TextView textSum;
     //private WebView webView;
 
     @Override
@@ -36,6 +39,7 @@ public class LineModeActivity extends AppCompatActivity {
 
         //準備フェーズ
         ListView listView = findViewById(R.id.container);
+
         final ArrayList<TwiContext> list = new ArrayList<>();
         MyAdapter adapter = new MyAdapter(LineModeActivity.this);
         adapter.setNounList(list);
@@ -52,33 +56,55 @@ public class LineModeActivity extends AppCompatActivity {
                 String next = S.substring(i+1,i+2);
                 temp += s;
                 if(Arrays.asList(stopwords).contains(s) && !Arrays.asList(stopwords).contains(next)) {
-                    list.add(setTwiContext(temp,filled));
+                    list.add(setTwiContext(temp,filled,true));
                     adapter.notifyDataSetChanged();
                     temp = "";
                 }
             }
             if(S.length()>0) {
                 temp += S.substring(S.length() - 1);
-                list.add(setTwiContext(temp, filled));
+                list.add(setTwiContext(temp,filled,false));
                 adapter.notifyDataSetChanged();
             }
             temp = "";
         }
 
-        //ツイートボタンフェーズをかきたいね
+        textSum = findViewById(R.id.textSum);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String EditedTemplate = "";
+                for(TwiContext twicontext : list){
+                    //選択されてない文は無視する
+                    if(twicontext.getSelected()) {
+                        String edited = twicontext.getEdit();
+                        //記述がなければ原文を入れる
+                        EditedTemplate += (!edited.isEmpty()) ? edited : twicontext.getAnswer();
+                        //連結がOFFの場合は改行を入れる
+                        if (!twicontext.getisConnect()) EditedTemplate += "\n";
+                    }
+                }
+                textSum.setText(Integer.toString(EditedTemplate.length()) + "/140");
+                }
+            });
+
+        //ツイートいくぜ！
         Button tweet_button = findViewById(R.id.Tweet_button);
         tweet_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String EditedTemplate = "";
                 for(TwiContext twicontext : list){
-                    String edited = twicontext.getEdit();
-                    if(edited.isEmpty()){
-                        EditedTemplate += twicontext.getAnswer()+"\n";
-                    }else{
-                        EditedTemplate += edited+"\n";
+                    //選択されてない文は無視する
+                    if(twicontext.getSelected()) {
+                        String edited = twicontext.getEdit();
+                        //記述がなければ原文を入れる
+                        EditedTemplate += (!edited.isEmpty()) ? edited : twicontext.getAnswer();
+                        //連結がOFFの場合は改行を入れる
+                        if (!twicontext.getisConnect()) EditedTemplate += "\n";
                     }
                 }
+                //ここを清書フェーズに書き換えても良さそう
                 Uri uri = Uri.parse(tweeting(EditedTemplate));
                 Intent intent = new Intent(Intent.ACTION_VIEW,uri);
                 startActivity(intent);
@@ -101,19 +127,21 @@ public class LineModeActivity extends AppCompatActivity {
         });
     }
 
-    private TwiContext setTwiContext(String temp,boolean filled){
+    private TwiContext setTwiContext(String temp,boolean filled,boolean isConnect){
         TwiContext twicontext = new TwiContext();
         twicontext.setAnswer(temp);
         if(filled)twicontext.setEdit(temp);
         else twicontext.setEdit("");
+        twicontext.setisConnect(isConnect);
+        twicontext.setSelected(true);
         return twicontext;
     }
 
     private String tweeting(String EditedTemplete) {
         String strTweet = "";
         String strMessage = EditedTemplete;
-        //String strHashTag = "#Android Studioでアプリ開発！";
-        //String strUrl = "http://androidstudio.hatenablog.com/";
+        //String strHashTag = "#TwiTemplater";
+        //String strUrl = "http://かくかくしかじか.hatenablog.com/";
 
         try {
             strTweet = "http://twitter.com/intent/tweet?text="
