@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private InputMethodManager inputMethodManager;
     private LinearLayout mainLayout;
     private EditText editText;
-    //private TextView textCount;
+    private TextView textCount;
     //private final int MAX_LENGTH = 140;
 
     @Override
@@ -30,24 +30,17 @@ public class MainActivity extends AppCompatActivity {
         Button edit_button = findViewById(R.id.edit_button);
         Button edit_button2 = findViewById(R.id.edit_button2);
         editText = findViewById(R.id.editText);
-        //textCount = findViewById(R.id.textCount);
-        //textCount.setText("0/" + MAX_LENGTH);
+        textCount = findViewById(R.id.textCount);
+        textCount.setText("0");
 
-        /**
+
         editText.addTextChangedListener(new TextWatcher(){
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count){
-                int textColor = Color.GRAY;
 
                 // 入力文字数の表示
                 int txtLength = s.length();
-                textCount.setText(Integer.toString(txtLength) + "/" + MAX_LENGTH);
-
-                // 指定文字数オーバーで文字色を赤くする
-                if (txtLength > MAX_LENGTH) {
-                    textColor = Color.RED;
-                }
-                textCount.setTextColor(textColor);
+                textCount.setText(Integer.toString(txtLength));
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -56,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
         });
-         */
 
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -46,6 +48,8 @@ public class FinalCopyActivity extends AppCompatActivity {
         p.removeView(edit_button2);
         editText = findViewById(R.id.editText);
         editText.setText(FinalCopy);
+        TextView modetitle = findViewById(R.id.modetitle_main);
+        modetitle.setText("清書モード");
         textCount = findViewById(R.id.textCount);
         textCount.setText(Integer.toString(FinalCopy.length()) + "/" + MAX_LENGTH);
         if(FinalCopy.length()>MAX_LENGTH)textCount.setTextColor(Color.RED);

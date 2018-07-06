@@ -13,25 +13,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/modetitle_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="テキストを貼付"
+            android:textSize="30sp"
+            android:layout_weight="1"/>
+
         <TextView
             android:id="@+id/textCount"
             android:layout_width="160sp"
-            android:layout_height="50sp"
+            android:layout_height="wrap_content"
             android:layout_weight="0"
             android:gravity="right"
             android:layout_gravity="right"
             android:text=""
             android:textSize="30sp" />
+        </LinearLayout>>
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:background="#DDDDDD"
             android:hint="@string/copybox"
             android:gravity="top|left"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:background="@drawable/mainframe"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
