@@ -23,7 +23,7 @@ public class LineModeActivity extends AppCompatActivity {
 
     private String Template;
     private boolean filled;
-    private TextView textSum;
+    //private TextView textSum;
     //private WebView webView;
 
     @Override
@@ -47,7 +47,7 @@ public class LineModeActivity extends AppCompatActivity {
 
         //テンプレートの分解フェーズ
         String[] template_split_one = Template.split("\n");
-        String[] stopwords = {" ","　","！","!","？","?"};
+        String[] stopwords = {" ","　","！","!","？","?",".","．","。"};
         ArrayList<Map<String, String>> template_split_two = new ArrayList<Map<String, String>>();
         String temp = "";
         for(String S : template_split_one){
@@ -69,6 +69,7 @@ public class LineModeActivity extends AppCompatActivity {
             temp = "";
         }
 
+        /**
         textSum = findViewById(R.id.textSum);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -87,8 +88,34 @@ public class LineModeActivity extends AppCompatActivity {
                 textSum.setText(Integer.toString(EditedTemplate.length()) + "/140");
                 }
             });
+         */
 
-        //ツイートいくぜ！
+        //清書モード
+        Button final_button = findViewById(R.id.final_button);
+        final_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String EditedTemplate = "";
+                for(TwiContext twicontext : list){
+                    //選択されてない文は無視する
+                    if(twicontext.getSelected()) {
+                        String edited = twicontext.getEdit();
+                        //記述がなければ原文を入れる
+                        EditedTemplate += (!edited.isEmpty()) ? edited : twicontext.getAnswer();
+                        //連結がOFFの場合は改行を入れる
+                        if (!twicontext.getisConnect()) EditedTemplate += "\n";
+                    }
+                }
+                //ここを清書フェーズに書き換えても良さそう
+                if(EditedTemplate.trim().length() > 0) {
+                    Intent intent = new Intent(getApplication(), FinalCopyActivity.class);
+                    intent.putExtra("FinalCopy", EditedTemplate);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        //清書いらねえツイートいくぜ！
         Button tweet_button = findViewById(R.id.Tweet_button);
         tweet_button.setOnClickListener(new View.OnClickListener() {
             @Override

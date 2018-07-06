@@ -64,7 +64,7 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-            //EditTexitが編集し終わったときに呼ばれる関数
+            //EditTextが編集し終わったときに呼ばれる関数
             @Override
             public void afterTextChanged(Editable s) {
                 //editのなかにこれいれないと更新されない

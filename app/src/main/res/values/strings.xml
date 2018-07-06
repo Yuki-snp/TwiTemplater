@@ -4,6 +4,7 @@
     <string name="edit_button">編集</string>
     <string name="edit_button2">編集(filled)</string>
     <string name="tweet_button">ツイート</string>
+    <string name="final_button">清書</string>
 
     <string name="switch_c">Connect: </string>
     <string name="switch_s">Select: </string>
