@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 if(str.trim().length() > 0) {
                     Intent intent = new Intent(getApplication(), LineModeActivity.class);
                     intent.putExtra("Template", str);
-                    intent.putExtra("filled", true);
+                    intent.putExtra("kaigyo_only", true);
                     startActivity(intent);
                 }
             }

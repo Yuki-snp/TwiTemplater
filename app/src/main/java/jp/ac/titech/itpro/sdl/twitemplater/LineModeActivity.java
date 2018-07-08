@@ -22,7 +22,7 @@ import java.util.Map;
 public class LineModeActivity extends AppCompatActivity {
 
     private String Template;
-    private boolean filled;
+    private boolean kaigyo_only;
     //private TextView textSum;
     //private WebView webView;
 
@@ -34,7 +34,7 @@ public class LineModeActivity extends AppCompatActivity {
         //読込フェーズ
         Intent intent = getIntent();
         Template = intent.getStringExtra("Template");
-        filled = intent.getBooleanExtra("filled",false);
+        kaigyo_only = intent.getBooleanExtra("kaigyo_only",false);
         Log.d("INPUT TEMPLATE",Template);
 
         //準備フェーズ
@@ -55,15 +55,17 @@ public class LineModeActivity extends AppCompatActivity {
                 String s = S.substring(i,i+1);
                 String next = S.substring(i+1,i+2);
                 temp += s;
-                if(Arrays.asList(stopwords).contains(s) && !Arrays.asList(stopwords).contains(next)) {
-                    list.add(setTwiContext(temp,filled,true));
-                    adapter.notifyDataSetChanged();
-                    temp = "";
+                if(!kaigyo_only) {
+                    if (Arrays.asList(stopwords).contains(s) && !Arrays.asList(stopwords).contains(next)) {
+                        list.add(setTwiContext(temp, true));
+                        adapter.notifyDataSetChanged();
+                        temp = "";
+                    }
                 }
             }
             if(S.length()>0) {
                 temp += S.substring(S.length() - 1);
-                list.add(setTwiContext(temp,filled,false));
+                list.add(setTwiContext(temp,false));
                 adapter.notifyDataSetChanged();
             }
             temp = "";
@@ -154,11 +156,10 @@ public class LineModeActivity extends AppCompatActivity {
         });
     }
 
-    private TwiContext setTwiContext(String temp,boolean filled,boolean isConnect){
+    private TwiContext setTwiContext(String temp,boolean isConnect){
         TwiContext twicontext = new TwiContext();
         twicontext.setAnswer(temp);
-        if(filled)twicontext.setEdit(temp);
-        else twicontext.setEdit("");
+        twicontext.setEdit("");
         twicontext.setisConnect(isConnect);
         twicontext.setSelected(true);
         return twicontext;
