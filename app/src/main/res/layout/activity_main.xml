@@ -56,17 +56,23 @@
                 android:id="@+id/edit_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
                 android:layout_weight="1"
+                android:background="@drawable/ttbutton"
                 android:text="@string/edit_button"
-                android:textSize="30sp"/>
+                android:textColor="#FFFFFFFF"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/edit_button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
                 android:layout_weight="1"
+                android:background="@drawable/ttbutton"
                 android:text="@string/edit_button2"
-                android:textSize="30sp"/>
+                android:textColor="#FFFFFFFF"
+                android:textSize="30sp" />
         </LinearLayout>
 
     </LinearLayout>

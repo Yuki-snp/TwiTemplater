@@ -51,7 +51,14 @@ public class MyAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = layoutInflater.inflate(R.layout.twi_context,parent,false);
 
-        ((TextView)convertView.findViewById(R.id.Answer)).setText(nounList.get(position).getAnswer());
+        int bgDrawable;
+        if(nounList.get(position).getSelected())bgDrawable = R.drawable.status_selected;
+        else bgDrawable = R.drawable.status_unselected;
+        convertView.setBackgroundDrawable(convertView.getResources().getDrawable(bgDrawable));
+
+        String setAnswer = nounList.get(position).getAnswer();
+        if(!nounList.get(position).getisConnect()) setAnswer += "⏎";
+        ((TextView)convertView.findViewById(R.id.Answer)).setText(setAnswer);
         ((EditText)convertView.findViewById(R.id.Edit)).setHint(nounList.get(position).getAnswer());
         ((EditText)convertView.findViewById(R.id.Edit)).setText(nounList.get(position).getEdit());
         //ココ重要
@@ -79,11 +86,13 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(buttonView.isChecked()) {
-                    //mSwitch : Off -> On の時の処理
+                    //Switch : Off -> On の時の処理
                     nounList.get(position).setisConnect(true);
+                    notifyDataSetChanged();
                 } else {
-                    //mSwitch : On -> Off の時の処理
+                    //Switch : On -> Off の時の処理
                     nounList.get(position).setisConnect(false);
+                    notifyDataSetChanged();
                 }
             }
         });
@@ -93,11 +102,13 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(buttonView.isChecked()) {
-                    //mSwitch : Off -> On の時の処理
+                    //Switch : Off -> On の時の処理
                     nounList.get(position).setSelected(true);
+                    notifyDataSetChanged();
                 } else {
-                    //mSwitch : On -> Off の時の処理
+                    //Switch : On -> Off の時の処理
                     nounList.get(position).setSelected(false);
+                    notifyDataSetChanged();
                 }
             }
         });

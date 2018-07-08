@@ -47,7 +47,7 @@ public class LineModeActivity extends AppCompatActivity {
 
         //テンプレートの分解フェーズ
         String[] template_split_one = Template.split("\n");
-        String[] stopwords = {" ","　","！","!","？","?",".","．","。"};
+        String[] stopwords = {" ","　","！","!","？","?",".","．","。",")","）","」","』","…"};
         ArrayList<Map<String, String>> template_split_two = new ArrayList<Map<String, String>>();
         String temp = "";
         for(String S : template_split_one){

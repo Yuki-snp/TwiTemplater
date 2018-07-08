@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String str = editText.getText().toString();
+                str = str.replace("　"," ");
                 if(str.trim().length() > 0) {
                     Intent intent = new Intent(getApplication(), LineModeActivity.class);
                     intent.putExtra("Template", str);

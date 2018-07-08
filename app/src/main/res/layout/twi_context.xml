@@ -37,15 +37,20 @@
             android:id="@+id/button_c"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_margin="2px"
             android:layout_weight="1"
+            android:background="@drawable/ttbutton_a"
             android:text="@string/button_c" />
 
         <Button
             android:id="@+id/button_f"
             android:layout_width="wrap_content"
-            android:layout_height="40sp"
+            android:layout_height="40dp"
+            android:layout_margin="2px"
             android:layout_weight="1"
-            android:text="@string/button_f" />
+            android:background="@drawable/ttbutton"
+            android:text="@string/button_f"
+            android:textColor="#FFFFFFFF" />
     </LinearLayout>
 
     <EditText

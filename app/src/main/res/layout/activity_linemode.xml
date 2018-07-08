@@ -40,17 +40,23 @@
                 android:id="@+id/final_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
+                android:layout_weight="1"
+                android:background="@drawable/ttbutton"
                 android:text="@string/final_button"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="#FFFFFFFF"
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/Tweet_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="2px"
+                android:layout_weight="1"
+                android:background="@drawable/tweet"
                 android:text="@string/tweet_button"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="#FFFFFFFF"
+                android:textSize="30sp" />
 
             <!--
             <TextView

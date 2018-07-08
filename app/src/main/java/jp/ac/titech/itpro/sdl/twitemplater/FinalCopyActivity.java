@@ -42,6 +42,7 @@ public class FinalCopyActivity extends AppCompatActivity {
 
         Button edit_button = findViewById(R.id.edit_button);
         edit_button.setText("ツイート");
+        edit_button.setBackgroundDrawable(getResources().getDrawable(R.drawable.tweet));
         //今度は2つもボタンがいらない
         Button edit_button2 = findViewById(R.id.edit_button2);
         ViewGroup p = (ViewGroup) edit_button2.getParent();

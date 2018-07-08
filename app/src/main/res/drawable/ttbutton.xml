@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 平常時 -->
+    <item android:state_pressed="false" android:state_focused="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <!-- 角の丸み -->
+            <corners android:radius="10px" />
+            <!-- 枠線 width:線の幅、color:線の色
+            <stroke
+                android:width="2dp"
+                android:color="#009688" /> -->
+            <!-- 背景色 -->
+            <solid android:color="#009688" />
+        </shape>
+    </item>
+    <!-- 押した -->
+    <item android:state_pressed="true" android:state_focused="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <!-- 角の丸み -->
+            <corners android:radius="10px" />
+            <!-- 枠線 width:線の幅、color:線の色
+            <stroke
+                android:width="2dp"
+                android:color="#005244" /> -->
+            <!-- 背景色 -->
+            <solid android:color="#005244" />
+        </shape>
+    </item>
+
+</selector>
